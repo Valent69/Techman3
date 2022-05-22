@@ -1284,7 +1284,7 @@ section
 {
 	font-size: 30px;
 	line-height: 0.75;
-	color: #1b1b1b;
+	color: #FFFFFF;
 	font-weight: 700;
 }
 .copyright
@@ -1293,7 +1293,7 @@ section
 	text-align: center;
 	font-size: 14px;
 	font-weight: 400;
-	color: #1b1b1b;
+	color: #FFFFFF;
 }
 .footer_social
 {
@@ -1311,7 +1311,7 @@ section
 .footer_social ul li a i
 {
 	font-size: 17px;
-	color: #1b1b1b;
+	color: #FFFFFF;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
