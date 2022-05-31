@@ -1089,7 +1089,11 @@ section
 .product_pagination ul li.active a,
 .product_pagination ul li:hover a
 {
-	color: #1b1b1b;
+	color: #ffffff;
+	background-color: #db5246;
+	border-radius: 3px;
+	margin: 10px;
+	padding: 3px;
 }
 
 /*********************************
