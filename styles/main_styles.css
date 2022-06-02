@@ -1097,6 +1097,11 @@ section
 {
 	max-width: 100%;
 }
+.product_image img:hover
+{
+	border: solid 2px #1b1b1b;
+	border-radius: 7px;
+}
 .product_content
 {
 	width: 100%;
