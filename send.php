@@ -3,16 +3,16 @@
     $lastName = $_POST['lastName'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
-
+    
     //Database connection
-    $conn = new mysqli('localhost','root','','techman3');
+    $conn = new mysqli('localhost','root','','test');
     if($conn->connect_error){
         die('Connection Failed : '.$conn->connect_error);
     }else{
-        $stmt = $conn->prepare("insert into registration(firstName,lastName,subject,message) values(?, ?, ?, ?)");
-        $stmt->bind_param("ssss",$firstName, $lastName, $subject, $message);
+        $stmt = $conn->prepare("insert into contact(firstName,lastName,subject,message) values(?, ?, ?, ?)");
+        $stmt ->bind_param("ssss",$firstName,$lastName,$subject,$message);
         $stmt->execute();
-        echo "Successfully";
+        echo "Cu Success!";
         $stmt->close();
         $conn->close();
     }
