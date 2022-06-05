@@ -12,7 +12,7 @@
         $stmt = $conn->prepare("insert into contact(firstName,lastName,subject,message) values(?, ?, ?, ?)");
         $stmt ->bind_param("ssss",$firstName,$lastName,$subject,$message);
         $stmt->execute();
-        echo "Cu Success!";
+        header("Location: succes.html");
         $stmt->close();
         $conn->close();
     }

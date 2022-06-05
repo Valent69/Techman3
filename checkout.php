@@ -1,25 +1,24 @@
 <?php
     $checkoutName = $_POST['checkoutName'];
-    $checkout_last_name = $_POST['checkout_last_name'];
-    $checkout_company = $_POST['checkout_company'];
-    $checkout_country = $_POST['checkout_country'];
-    $checkout_address = $_POST['checkout_address'];
-    $checkout_zipcode = $_POST['checkout_zipcode'];
-    $checkout_city = $_POST['checkout_city'];
-    $checkout_province = $_POST['checkout_province'];
-    $checkout_phone = $_POST['checkout_phone'];
-    $checkout_email = $_POST['checkout_email'];
+    $checkoutLastname = $_POST['checkoutLastname'];
+    $checkoutCompany = $_POST['checkoutCompany'];
+    $checkoutCountry = $_POST['checkoutCountry'];
+    $checkoutAddress = $_POST['checkoutAddress'];
+    $checkoutZipcode = $_POST['checkoutZipcode'];
+    $checkoutCity = $_POST['checkoutCity'];
+    $checkoutPhone = $_POST['checkoutPhone'];
+    $checkoutEmail = $_POST['checkoutEmail'];
 
     
     //Database connection
-    $conn = new mysqli('localhost','root','','test1');
+    $conn = new mysqli('localhost','root','','coin');
     if($conn->connect_error){
         die('Connection Failed : '.$conn->connect_error);
     }else{
-        $stmt = $conn->prepare("insert into checkout(checkoutName,checkout_last_name,checkout_company,checkout_country,checkout_address,checkout_zipcode,checkout_city,checkout_province,checkout_phone,checkout_email) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,)");
-        $stmt ->bind_param("sssssissis",$checkoutName,$checkout_last_name,$checkout_company,$checkout_country,$checkout_address,$checkout_zipcode,$checkout_city,$checkout_province,$checkout_phone,$checkout_email);
+        $stmt = $conn->prepare("insert into checkout(checkoutName,checkoutLastname,checkoutCompany,checkoutCountry,checkoutAddress,checkoutZipcode,checkoutCity,checkoutPhone,checkoutEmail) values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt ->bind_param("sssssisis",$checkoutName,$checkoutLastname,$checkoutCompany,$checkoutCountry,$checkoutAddress,$checkoutZipcode,$checkoutCity,$checkoutPhone,$checkoutEmail);
         $stmt->execute();
-        echo "Cu Success!";
+        header("Location: succes.html");
         $stmt->close();
         $conn->close();
     }
