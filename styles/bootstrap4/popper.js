@@ -13,7 +13,7 @@
 var nativeHints = ['native code', '[object MutationObserverConstructor]'];
 
 /**
- * Determine if a function is implemented natively (as opposed to a polyfill).
+ * 
  * @method
  * @memberof Popper.Utils
  * @argument {Function | undefined} fn the function to check
@@ -40,9 +40,7 @@ function microtaskDebounce(fn) {
   var i = 0;
   var elem = document.createElement('span');
 
-  // MutationObserver provides a mechanism for scheduling microtasks, which
-  // are scheduled *before* the next task. This gives us a way to debounce
-  // a function but ensure it's called *before* the next paint.
+ 
   var observer = new MutationObserver(function () {
     fn();
     scheduled = false;
@@ -54,7 +52,7 @@ function microtaskDebounce(fn) {
     if (!scheduled) {
       scheduled = true;
       elem.setAttribute('x-index', i);
-      i = i + 1; // don't use compund (+=) because it doesn't get optimized in V8
+      i = i + 1; 
     }
   };
 }
@@ -72,15 +70,11 @@ function taskDebounce(fn) {
   };
 }
 
-// It's common for MutationObserver polyfills to be seen in the wild, however
-// these rely on Mutation Events which only occur when an element is connected
-// to the DOM. The algorithm used in this module does not use a connected element,
-// and so we must ensure that a *native* MutationObserver is available.
+
 var supportsNativeMutationObserver = isBrowser && isNative(window.MutationObserver);
 
 /**
-* Create a debounced version of a method, that's asynchronously deferred
-* but called in the minimum time possible.
+* 
 *
 * @method
 * @memberof Popper.Utils
@@ -90,11 +84,11 @@ var supportsNativeMutationObserver = isBrowser && isNative(window.MutationObserv
 var debounce = supportsNativeMutationObserver ? microtaskDebounce : taskDebounce;
 
 /**
- * Check if the given variable is a function
+ *
  * @method
  * @memberof Popper.Utils
- * @argument {Any} functionToCheck - variable to check
- * @returns {Boolean} answer to: is a function?
+ * @argument {Any} functionToCheck - 
+ * @returns {Boolean} 
  */
 function isFunction(functionToCheck) {
   var getType = {};
@@ -102,7 +96,7 @@ function isFunction(functionToCheck) {
 }
 
 /**
- * Get CSS computed property of the given element
+ * G
  * @method
  * @memberof Popper.Utils
  * @argument {Eement} element
@@ -112,13 +106,13 @@ function getStyleComputedProperty(element, property) {
   if (element.nodeType !== 1) {
     return [];
   }
-  // NOTE: 1 DOM access here
+  // 
   var css = window.getComputedStyle(element, null);
   return property ? css[property] : css;
 }
 
 /**
- * Returns the parentNode or the host of the element
+ * 
  * @method
  * @memberof Popper.Utils
  * @argument {Element} element
@@ -132,19 +126,19 @@ function getParentNode(element) {
 }
 
 /**
- * Returns the scrolling parent of the given element
+ * 
  * @method
  * @memberof Popper.Utils
  * @argument {Element} element
  * @returns {Element} scroll parent
  */
 function getScrollParent(element) {
-  // Return body, `getScroll` will take care to get the correct `scrollTop` from it
+  // 
   if (!element || ['HTML', 'BODY', '#document'].indexOf(element.nodeName) !== -1) {
     return window.document.body;
   }
 
-  // Firefox want us to check `-x` and `-y` variations as well
+  
 
   var _getStyleComputedProp = getStyleComputedProperty(element),
       overflow = _getStyleComputedProp.overflow,
@@ -159,14 +153,14 @@ function getScrollParent(element) {
 }
 
 /**
- * Returns the offset parent of the given element
+ * 
  * @method
  * @memberof Popper.Utils
  * @argument {Element} element
- * @returns {Element} offset parent
+ * @returns {Element} 
  */
 function getOffsetParent(element) {
-  // NOTE: 1 DOM access here
+
   var offsetParent = element && element.offsetParent;
   var nodeName = offsetParent && offsetParent.nodeName;
 
@@ -174,8 +168,7 @@ function getOffsetParent(element) {
     return window.document.documentElement;
   }
 
-  // .offsetParent will return the closest TD or TABLE in case
-  // no offsetParent is present, I hate this job...
+  
   if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
     return getOffsetParent(offsetParent);
   }
@@ -193,7 +186,7 @@ function isOffsetContainer(element) {
 }
 
 /**
- * Finds the root node (document, shadowDOM root) of the given element
+ * 
  * @method
  * @memberof Popper.Utils
  * @argument {Element} node
@@ -208,31 +201,30 @@ function getRoot(node) {
 }
 
 /**
- * Finds the offset parent common to the two provided nodes
+ * 
  * @method
  * @memberof Popper.Utils
  * @argument {Element} element1
  * @argument {Element} element2
- * @returns {Element} common offset parent
+ * @returns {Element} 
  */
 function findCommonOffsetParent(element1, element2) {
-  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
+  // 
   if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
     return window.document.documentElement;
   }
 
-  // Here we make sure to give as "start" the element that comes first in the DOM
+  // 
   var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
   var start = order ? element1 : element2;
   var end = order ? element2 : element1;
 
-  // Get common ancestor container
+  // 
   var range = document.createRange();
   range.setStart(start, 0);
   range.setEnd(end, 0);
   var commonAncestorContainer = range.commonAncestorContainer;
 
-  // Both nodes are inside #document
 
   if (element1 !== commonAncestorContainer && element2 !== commonAncestorContainer || start.contains(end)) {
     if (isOffsetContainer(commonAncestorContainer)) {
@@ -242,7 +234,7 @@ function findCommonOffsetParent(element1, element2) {
     return getOffsetParent(commonAncestorContainer);
   }
 
-  // one of the nodes is inside shadowDOM, find which one
+  // 
   var element1root = getRoot(element1);
   if (element1root.host) {
     return findCommonOffsetParent(element1root.host, element2);
@@ -252,12 +244,12 @@ function findCommonOffsetParent(element1, element2) {
 }
 
 /**
- * Gets the scroll value of the given element in the given side (top and left)
+ * 
  * @method
  * @memberof Popper.Utils
  * @argument {Element} element
- * @argument {String} side `top` or `left`
- * @returns {number} amount of scrolled pixels
+ * @argument {String} side 
+ * @returns {number} 
  */
 function getScroll(element) {
   var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
@@ -274,15 +266,7 @@ function getScroll(element) {
   return element[upperSide];
 }
 
-/*
- * Sum or subtract the element scroll values (left and top) from a given rect object
- * @method
- * @memberof Popper.Utils
- * @param {Object} rect - Rect object you want to change
- * @param {HTMLElement} element - The element from the function reads the scroll values
- * @param {Boolean} subtract - set to true if you want to subtract the scroll values
- * @return {Object} rect - The modifier rect object
- */
+
 function includeScroll(rect, element) {
   var subtract = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
@@ -296,15 +280,7 @@ function includeScroll(rect, element) {
   return rect;
 }
 
-/*
- * Helper to detect borders of a given element
- * @method
- * @memberof Popper.Utils
- * @param {CSSStyleDeclaration} styles
- * Result of `getStyleComputedProperty` on the given element
- * @param {String} axis - `x` or `y`
- * @return {number} borders - The borders size of the given axis
- */
+
 
 function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
@@ -314,7 +290,7 @@ function getBordersSize(styles, axis) {
 }
 
 /**
- * Tells if you are running Internet Explorer 10
+ 
  * @method
  * @memberof Popper.Utils
  * @returns {Boolean} isIE10
@@ -401,11 +377,11 @@ var _extends = Object.assign || function (target) {
 };
 
 /**
- * Given element offsets, generate an output similar to getBoundingClientRect
+ *
  * @method
  * @memberof Popper.Utils
  * @argument {Object} offsets
- * @returns {Object} ClientRect like output
+ * @returns {Object}
  */
 function getClientRect(offsets) {
   return _extends({}, offsets, {
@@ -415,7 +391,7 @@ function getClientRect(offsets) {
 }
 
 /**
- * Get bounding client rect of given element
+ *
  * @method
  * @memberof Popper.Utils
  * @param {HTMLElement} element
@@ -424,9 +400,7 @@ function getClientRect(offsets) {
 function getBoundingClientRect(element) {
   var rect = {};
 
-  // IE10 10 FIX: Please, don't ask, the element isn't
-  // considered in DOM in some circumstances...
-  // This isn't reproducible in IE10 compatibility mode of IE11
+ 
   if (isIE10$1()) {
     try {
       rect = element.getBoundingClientRect();
@@ -448,7 +422,7 @@ function getBoundingClientRect(element) {
     height: rect.bottom - rect.top
   };
 
-  // subtract scrollbar size from sizes
+  
   var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
   var width = sizes.width || element.clientWidth || result.right - result.left;
   var height = sizes.height || element.clientHeight || result.bottom - result.top;
@@ -456,8 +430,7 @@ function getBoundingClientRect(element) {
   var horizScrollbar = element.offsetWidth - width;
   var vertScrollbar = element.offsetHeight - height;
 
-  // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
-  // we make this check conditional for performance reasons
+  
   if (horizScrollbar || vertScrollbar) {
     var styles = getStyleComputedProperty(element);
     horizScrollbar -= getBordersSize(styles, 'x');
@@ -490,10 +463,7 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   offsets.marginTop = 0;
   offsets.marginLeft = 0;
 
-  // Subtract margins of documentElement in case it's being used as parent
-  // we do this only on HTML because it's the only element that behaves
-  // differently when margins are applied to it. The margins are included in
-  // the box of the documentElement, in the other cases not.
+  
   if (!isIE10 && isHTML) {
     var marginTop = +styles.marginTop.split('px')[0];
     var marginLeft = +styles.marginLeft.split('px')[0];
@@ -503,7 +473,7 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
     offsets.left -= borderLeftWidth - marginLeft;
     offsets.right -= borderLeftWidth - marginLeft;
 
-    // Attach marginTop and marginLeft because in some circumstances we may need them
+    
     offsets.marginTop = marginTop;
     offsets.marginLeft = marginLeft;
   }
@@ -535,7 +505,7 @@ function getViewportOffsetRectRelativeToArtbitraryNode(element) {
 }
 
 /**
- * Check if the given element is fixed or is inside a fixed parent
+ *
  * @method
  * @memberof Popper.Utils
  * @argument {Element} element
@@ -554,25 +524,25 @@ function isFixed(element) {
 }
 
 /**
- * Computed the boundaries limits and return them
+ * 
  * @method
  * @memberof Popper.Utils
  * @param {HTMLElement} popper
  * @param {HTMLElement} reference
  * @param {number} padding
- * @param {HTMLElement} boundariesElement - Element used to define the boundaries
- * @returns {Object} Coordinates of the boundaries
+ * @param {HTMLElement} boundariesElement 
+ * @returns {Object} 
  */
 function getBoundaries(popper, reference, padding, boundariesElement) {
-  // NOTE: 1 DOM access here
+  
   var boundaries = { top: 0, left: 0 };
   var offsetParent = findCommonOffsetParent(popper, reference);
 
-  // Handle viewport case
+  
   if (boundariesElement === 'viewport') {
     boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent);
   } else {
-    // Handle other cases based on DOM element used as boundaries
+   
     var boundariesNode = void 0;
     if (boundariesElement === 'scrollParent') {
       boundariesNode = getScrollParent(getParentNode(popper));
