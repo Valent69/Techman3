@@ -1118,80 +1118,23 @@ section
 7. Footer
 *********************************/
 
-.footer_overlay
-{
-	width: 100%;
-	height: 129px;
-	background: transparent;
-	z-index: 1;
-}
-.footer
-{
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	z-index: 1;
-}
-.footer_background
-{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-.footer_content
-{
-	width: 100%;
-	height: 129px;
-}
-.footer_logo
-{
-	width: 30%;
-}
-.footer_logo a
-{
-	font-size: 30px;
-	line-height: 0.75;
-	color: #FFFFFF;
-	font-weight: 700;
-}
-.copyright
-{
-	width: 40%;
-	text-align: center;
-	font-size: 14px;
-	font-weight: 400;
-	color: #FFFFFF;
-}
-.footer_social
-{
-	width: 30%;
-	text-align: right;
-}
-.footer_social ul li
-{
-	display: inline-block;
-}
-.footer_social ul li:not(:last-child)
-{
-	margin-right: 26px;
-}
-.footer_social ul li a i
-{
-	font-size: 17px;
-	color: #FFFFFF;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.footer_social ul li a i:hover
-{
-	color: #FFFFFF;
-}
+.footer-top { padding: 60px 0 40px 0; text-align: left; 
+	background: rgb(240,177,219);
+	background: linear-gradient(90deg, rgba(240,177,219,1) 0%, rgba(128,21,228,1) 100%);}
+.footer-top h3 { padding-bottom: 10px; color: white;}
+.footer-top p {color: white;}
+.footer-contact p { word-wrap: break-word; }
+.footer-contact i { padding-right: 10px; font-size: 18px; color: rgb(255, 255, 255); }
+.footer-contact p a { border-bottom: 1px dashed rgb(255, 255, 255); }
+.footer-contact p a:hover, .footer-contact p a:focus { border-bottom: 1px dashed #856dc0; }
+
+.footer-links a { color: rgb(255, 255, 255); border: 0; }
+.footer-links a:hover, .footer-links a:focus { color: rgb(255, 255, 255); margin-left: 3px; }
+
+.footer-bottom { padding: 0 0 60px 0; 
+	background: rgb(240,177,219);
+	background: linear-gradient(90deg, rgba(240,177,219,1) 0%, rgba(128,21,228,1) 100%); }
+
+.footer-social a { margin: 0 10px; color: white; border: 0; }
+.footer-social a:hover, .footer-social a:focus { color: #3100af; border: 0; }
+.footer-social i { font-size: 24px; vertical-align: middle; }
