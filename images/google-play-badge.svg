@@ -16,7 +16,7 @@
 	.st10{opacity:0.25;fill:#FFFFFF;enable-background:new    ;}
 </style>
 <g>
-	<rect x="-10" y="-10" class="st0" width="155" height="60"/>
+	<rect x="-10" y="-10" class="st0" width="135px" height="40px/>
 	<g>
 		<path d="M130,40H5c-2.8,0-5-2.2-5-5V5c0-2.8,2.2-5,5-5h125c2.8,0,5,2.2,5,5v30C135,37.8,132.8,40,130,40z"/>
 	</g>

@@ -1118,8 +1118,8 @@ section
 7. Footer
 *********************************/
 .footer-top { padding: 60px 0 40px 0; text-align: left; 
-	background: rgb(240,177,219);
-	background: linear-gradient(90deg, rgba(240,177,219,1) 0%, rgba(128,21,228,1) 100%);}
+	background: rgb(171,242,214);
+background: linear-gradient(90deg, rgba(171,242,214,1) 18%, rgba(232,144,97,1) 100%);}
 .footer-top h3 { padding-bottom: 10px; color: white;}
 .footer-top p {color: white;}
 .footer-contact p { word-wrap: break-word; }
@@ -1131,8 +1131,8 @@ section
 .footer-links a:hover, .footer-links a:focus { color: rgb(255, 255, 255); margin-left: 3px; border-radius: 4px; padding: 3px; }
 
 .footer-bottom { padding: 0 0 60px 0; 
-	background: rgb(240,177,219);
-	background: linear-gradient(90deg, rgba(240,177,219,1) 0%, rgba(128,21,228,1) 100%); }
+	background: rgb(171,242,214);
+background: linear-gradient(90deg, rgba(171,242,214,1) 18%, rgba(232,144,97,1) 100%); }
 
 .footer-social a { margin: 0 10px; color: white; border: 0;  }
 .footer-social a:hover, .footer-social a:focus { color: rgb(232, 180, 180); }
