@@ -1268,6 +1268,9 @@ section
 	transform: rotate(0deg);
 	border-radius: 5px;
 }
+.star{
+	color: gold;
+}
 .product_extra a
 {
 	display: block;
