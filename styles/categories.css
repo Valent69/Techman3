@@ -830,6 +830,9 @@ section
 }
 .star{
 	color: gold;
+    background-color: #6591de;
+    border-radius: 13px;
+    padding: 0px 5px 0 5px;
 }
 .home_content_container
 {
